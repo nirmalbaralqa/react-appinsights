@@ -6,14 +6,10 @@
 pool:
   vmImage: 'ubuntu-latest'
 
-strategy:
-  inputs:
-    versionSpec: '12.x'
-    
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: $(node_version)
+    versionSpec: '12.x'
   displayName: 'Install Node.js'
 
 - script: |
