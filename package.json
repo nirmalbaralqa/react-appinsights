@@ -19,7 +19,8 @@
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags",
-    "report": "cypress run --reporter junit --reporter-options 'mochaFile=cypress/e2e-junit-test-report.xml'"
+    "report": "cypress run --reporter junit --reporter-options 'mochaFile=cypress/results-[hash].xml'",
+    "posteport": "jrm cypress/e2e-junit-test-report.xml \"cypress/results-*.xml\""
   },
   "repository": {
     "type": "git",
