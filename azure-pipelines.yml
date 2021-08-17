@@ -20,12 +20,14 @@ steps:
     displayName: "npm install, build and test"
 
   - task: PublishTestResults@2
+    displayName: "Publish unit test report"
     inputs:
       testResultsFiles: "**/test-report.xml"
     condition: succeededOrFailed()
     continueOnError: true
 
   - task: PublishCodeCoverageResults@1
+    displayName: "Publish test coverage report"
     inputs:
       codeCoverageTool: Cobertura
       summaryFileLocation: "$(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml"
@@ -34,7 +36,7 @@ steps:
     continueOnError: true
 
   - task: PublishTestResults@2
-    displayName: "Publish the test reports"
+    displayName: "Publish the e2e test report"
     inputs:
       testResultsFiles: "**/cypress/e2e-junit-test-report.xml"
     condition: succeededOrFailed()
@@ -45,5 +47,5 @@ steps:
     inputs:
       pathtoPublish: "$(Build.SourcesDirectory)/cypress/screenshots/"
       artifactName: screenshots
-    condition: failed()
+    condition: succeededOrFailed()
     continueOnError: true
