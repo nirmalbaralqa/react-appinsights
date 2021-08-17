@@ -19,8 +19,9 @@
     "preversion": "npm run lint",
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags",
-    "report": "cypress run --reporter junit --reporter-options 'mochaFile=cypress/results-[hash].xml'",
-    "posteport": "jrm cypress/e2e-junit-test-report.xml \"cypress/results-*.xml\""
+    "prereport": "rm -rf cypress/*.xml || true",
+    "report": "(cypress run --reporter junit --reporter-options 'mochaFile=cypress/results-[hash].xml' || true)",
+    "postreport": "jrm cypress/e2e-junit-test-report.xml \"cypress/results-*.xml\""
   },
   "repository": {
     "type": "git",
@@ -58,6 +59,7 @@
     "enzyme-adapter-react-16": "^1.13.1",
     "jest": "^24.8.0",
     "jest-junit-reporter": "^1.1.0",
+    "junit-report-merger": "^3.0.1",
     "prettier": "^1.17.1",
     "react-dom": "^16.8.6",
     "rimraf": "^2.6.3",

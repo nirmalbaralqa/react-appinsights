@@ -10,7 +10,6 @@ import { History } from "history";
  * @interface IReactAISettings
  */
 export default interface IReactAISettings {
-
   /**
    * Context/custom dimensions for initialization.
    * You can also do this post initialization using ReactAI.setContext()
