@@ -4,26 +4,46 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: "ubuntu-latest"
 
 steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '12.x'
-  displayName: 'Install Node.js'
+  - task: NodeTool@0
+    inputs:
+      versionSpec: "12.x"
+    displayName: "Install Node.js"
 
-- script: |
-    npm install
-    npm run build
-    npm test
-  displayName: 'npm install, build and test'
+  - script: |
+      npm install
+      npm run build
+      npm test
+      npm run report
+    displayName: "npm install, build and test"
 
-- task: PublishTestResults@2
-  inputs:
-      testResultsFiles: '**/test-report.xml' 
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFiles: "**/test-report.xml"
+    condition: succeededOrFailed()
+    continueOnError: true
 
-- task: PublishCodeCoverageResults@1
-  inputs:
-    codeCoverageTool: Cobertura
-    summaryFileLocation: '$(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml'
-    reportDirectory: '$(System.DefaultWorkingDirectory)/coverage/lcov-report'
+  - task: PublishCodeCoverageResults@1
+    inputs:
+      codeCoverageTool: Cobertura
+      summaryFileLocation: "$(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml"
+      reportDirectory: "$(System.DefaultWorkingDirectory)/coverage/lcov-report"
+    condition: succeededOrFailed()
+    continueOnError: true
+
+  - task: PublishTestResults@2
+    displayName: "Publish the test reports"
+    inputs:
+      testResultsFiles: "**/cypress/e2e-junit-test-report.xml"
+    condition: succeededOrFailed()
+    continueOnError: true
+
+  - task: PublishBuildArtifacts@1
+    displayName: "Publish screenshots when there were issues"
+    inputs:
+      pathtoPublish: "$(Build.SourcesDirectory)/cypress/screenshots/"
+      artifactName: screenshots
+    condition: failed()
+    continueOnError: true
