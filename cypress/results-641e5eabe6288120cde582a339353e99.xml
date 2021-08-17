@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Mocha Tests" time="1.4410" tests="1" failures="0">
-  <testsuite name="Root Suite" timestamp="2021-08-17T09:50:07" tests="0" file="cypress/integration/first.test.ts" time="0.0000" failures="0">
-  </testsuite>
-  <testsuite name="My First Test" timestamp="2021-08-17T09:50:07" tests="1" time="1.4410" failures="0">
-    <testcase name="My First Test clicking type navigates to a new url" time="1.4410" classname="clicking type navigates to a new url">
-    </testcase>
-  </testsuite>
-</testsuites>
