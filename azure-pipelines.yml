@@ -16,6 +16,7 @@ steps:
     npm install
     npm run build
     npm test
+    npm report
   displayName: 'npm install, build and test'
 
 - task: PublishTestResults@2
@@ -27,3 +28,18 @@ steps:
     codeCoverageTool: Cobertura
     summaryFileLocation: '$(System.DefaultWorkingDirectory)/coverage/cobertura-coverage.xml'
     reportDirectory: '$(System.DefaultWorkingDirectory)/coverage/lcov-report'
+
+  - task: PublishTestResults@2
+    displayName: 'Publish the test reports'
+    inputs:
+      testResultsFiles: '**/cypress/e2e-junit-test-report.xml'
+    condition: succeededOrFailed()
+    continueOnError: true
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish screenshots when there were issues'
+    inputs:
+      pathtoPublish: '**/cypress/screenshots'
+      artifactName: screenshots
+    condition: failed()
+    continueOnError: true
