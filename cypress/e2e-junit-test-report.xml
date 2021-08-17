@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<testsuites failures="1" errors="0" tests="2">
+  <testsuite name="Root Suite" timestamp="2021-08-17T09:50:11" tests="0" file="cypress/integration/second.test.ts" time="0.0000" failures="0"/>
+  <testsuite name="My First Test" timestamp="2021-08-17T09:50:11" tests="1" time="0.0000" failures="1">
+    <testcase name="My First Test clicking type navigates to a new url" time="0.0000" classname="clicking type navigates to a new url">
+      <failure message="Timed out retrying after 4000ms: expected 'https://example.cypress.io/commands/actions' to include '/commannds/actions'" type="AssertionError"><![CDATA[AssertionError: Timed out retrying after 4000ms: expected 'https://example.cypress.io/commands/actions' to include '/commannds/actions'
+    at Context.eval (https://example.cypress.io/__cypress/tests?p=cypress/integration/second.test.ts:101:18)]]></failure>
+    </testcase>
+  </testsuite>
+  <testsuite name="Root Suite" timestamp="2021-08-17T09:50:07" tests="0" file="cypress/integration/first.test.ts" time="0.0000" failures="0"/>
+  <testsuite name="My First Test" timestamp="2021-08-17T09:50:07" tests="1" time="1.4410" failures="0">
+    <testcase name="My First Test clicking type navigates to a new url" time="1.4410" classname="clicking type navigates to a new url"/>
+  </testsuite>
+</testsuites>

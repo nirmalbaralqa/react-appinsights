@@ -38,6 +38,7 @@ steps:
   - task: PublishTestResults@2
     displayName: "Publish the e2e test report"
     inputs:
+      testRunTitle: "E2E"
       testResultsFiles: "**/cypress/e2e-junit-test-report.xml"
     condition: succeededOrFailed()
     continueOnError: true
